@@ -1,0 +1,41 @@
+.App {
+  text-align: center;
+}
+
+.buttonBox {
+  display: flex;
+  justify-content: space-between;
+}
+.sortBtn {
+  width:fit-content;
+  background-color: transparent;
+  border: 0;
+  font-weight: 700;
+  margin: 15px 25px;
+}
+.delBtn {
+  color: red;
+  cursor: pointer;
+}
+
+.menuBtn {
+  margin: 15px 25px;
+  padding: 15px 25px;
+  width: 200px;
+  border: 0;
+  border-radius: 15px;
+  background-color: #6c757d;
+  color:#fff;
+}
+
+.menuBtn-active {
+  background-color: #0d6efd;
+}
+
+.tableHead {
+  margin: 15px 25px;
+}
+
+.prodImage {
+  width: 50px;
+}
