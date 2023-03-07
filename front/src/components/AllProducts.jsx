@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import { useDataContext } from "../context/DataContext";
 
-function FilteredTable() {
-  const { data, setData, filter, isDesc, setIsDesc, portion, showTable } =
+export default function AllProducts() {
+  const { data, setData, isDesc, setIsDesc } =
     useDataContext();
 
   const sortPrice = () => {
@@ -20,13 +20,13 @@ function FilteredTable() {
     try {
       axios
         .get(
-          `http://localhost:5000/products?limit=${filter}&isDesc=${isDesc}&portion=${portion}`
+          `http://localhost:5000/products?isDesc=${isDesc}`
         )
         .then((res) => setData(res.data));
     } catch (error) {
       console.log(error.message);
     }
-  }, [filter, isDesc, setData, portion, showTable]);
+  }, [isDesc, setData]);
 
   return (
     <Table striped bordered hover>
@@ -86,6 +86,4 @@ function FilteredTable() {
       </tbody>
     </Table>
   );
-}
-
-export default FilteredTable;
+};

@@ -38,4 +38,22 @@
 
 .prodImage {
   width: 50px;
+  height: 50px;
+}
+
+.cardBox {
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.card {
+  margin: 20px;
+}
+
+.cardImage {
+  width: 332px;
+  height: 200px;
+  margin: 15px 25px;
+  padding: 10px 25px;
 }

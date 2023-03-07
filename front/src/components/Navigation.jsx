@@ -1,16 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import { useDataContext } from "../context/DataContext.js";
 const menus = [
-  { name: "All products", handler: "100", show: "table" },
-  { name: "Load More", handler: "5,5", show: "table" },
-  { name: "Categories", handler: "", show: "grid" },
-  { name: "Brands", handler: "", show: "grid" },
-  { name: "+ Add Product", handler: "", show: "addTable" },
+  { name: "All products", filter: "", nav: "/" },
+  { name: "Load More", filter: "5", nav: "/more" },
+  { name: "Categories", filter: "", nav: "/categories" },
+  { name: "Brands", filter: "", nav: "/brands" },
+  { name: "+ Add Product", filter: "", nav: "/addProduct" },
 ];
-
 export default function Navigation() {
+  const navigate = useNavigate();
   const { current, setCurrent } = useDataContext();
   const { setFilter } = useDataContext();
-  const { setShowTable } = useDataContext();
 
   return (
     <div>
@@ -28,12 +28,12 @@ export default function Navigation() {
                 onClick={(e) => {
                   e.preventDefault();
                   setCurrent(index);
-                  setFilter(menu.handler);
-                  setShowTable(menu.show);
-                  console.log("Filter: ", menu.handler);
+                  setFilter(menu.filter);
+                  navigate(menu.nav);
+                  
                 }}
               >
-                <span> {menu.name}</span>
+                <span>{menu.name}</span>
               </button>
             )
           )}

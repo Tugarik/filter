@@ -1,5 +1,5 @@
 import express from "express";
-import { byCategory, getProducts } from "../services/product-service.js";
+import { byBrand, byCategory, getBrands, getCategories, getMore, getProducts } from "../services/product-service.js";
 
 const ProductRouter = express.Router();
 
@@ -8,17 +8,47 @@ const ProductRouter = express.Router();
 ProductRouter.get("/products", async (req, res) => {
   console.log("Product avah huselt orj irlee");
   const { query } = req;
-  const result = await getProducts(query.limit || 100, query.isDesc);
+  const result = await getProducts(query.isDesc);
   res.send(result);
 });
 
-ProductRouter.get("/products/load", async (req, res) => {
-    console.log("Product avah huselt orj irlee");
+ProductRouter.get("/products/more", async (req, res) => {
+    console.log("More avah huselt orj irlee");
     const { query } = req;
-    const result = await byLoad(query.limit || 10);
+    const result = await getMore(query.limit || 10, query.portion || 0, query.isDesc || 'asc');
+    res.send(result);
+  });
+  
+ProductRouter.get("/products/categories", async (req, res) => {
+    console.log("Categories avah huselt orj irlee");
+    const { query } = req;
+    const result = await getCategories();
+    res.send(result);
+    console.log(result);
+  });
+
+ProductRouter.get("/products/category", async (req, res) => {
+    console.log("Category avah huselt orj irlee");
+    const { query } = req;
+    console.log("Param: ", query.param);
+    const result = await byCategory(query.param);
     res.send(result);
   });
 
+  ProductRouter.get("/products/brands", async (req, res) => {
+    console.log("Brands avah huselt orj irlee");
+    const { query } = req;
+    const result = await getBrands();
+    res.send(result);
+    console.log(result);
+  });
 
+  ProductRouter.get("/products/brand", async (req, res) => {
+    console.log("Brand avah huselt orj irlee");
+    const { query } = req;
+    console.log("Param: ", query.param);
+    const result = await byBrand(query.param);
+    res.send(result);
+  });
 
 export default ProductRouter;
