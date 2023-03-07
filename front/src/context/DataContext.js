@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useState } from "react";
 
 const AllContexts = createContext(null);
@@ -9,12 +8,11 @@ export function useDataContext() {
 
 export default function DataContext({ children }) {
   const [current, setCurrent] = useState(0);
-  const [filter, setFilter] = useState('100');
+  const [filter, setFilter] = useState("100");
   const [data, setData] = useState();
   const [isDesc, setIsDesc] = useState();
   const [portion, setPortion] = useState(1);
-  
- 
+  const [showTable, setShowTable] = useState("table");
 
   return (
     <AllContexts.Provider
@@ -23,13 +21,14 @@ export default function DataContext({ children }) {
         setCurrent,
         filter,
         setFilter,
-        data, 
+        data,
         setData,
         isDesc,
         setIsDesc,
         portion,
-        setPortion
-      
+        setPortion,
+        showTable,
+        setShowTable,
       }}
     >
       {children}
