@@ -11,7 +11,7 @@ export default function Navigation() {
   const navigate = useNavigate();
   const { current, setCurrent } = useDataContext();
   const { setFilter } = useDataContext();
-
+  
   return (
     <div>
       <div className="buttonBox">
@@ -30,7 +30,7 @@ export default function Navigation() {
                   setCurrent(index);
                   setFilter(menu.filter);
                   navigate(menu.nav);
-                  
+                  localStorage.setItem("menu", JSON.stringify(index));
                 }}
               >
                 <span>{menu.name}</span>

@@ -1,5 +1,5 @@
 import express from "express";
-import { byBrand, byCategory, getBrands, getCategories, getMore, getProducts } from "../services/product-service.js";
+import { byBrand, byCategory, delProduct, getBrands, getCategories, getMore, getProducts, getSort } from "../services/product-service.js";
 
 const ProductRouter = express.Router();
 
@@ -7,8 +7,14 @@ const ProductRouter = express.Router();
 
 ProductRouter.get("/products", async (req, res) => {
   console.log("Product avah huselt orj irlee");
+  const result = await getProducts();
+  res.send(result);
+});
+
+ProductRouter.get("/products/sort", async (req, res) => {
+  console.log("Product sort huselt orj irlee");
   const { query } = req;
-  const result = await getProducts(query.isDesc);
+  const result = await getSort(query.isDesc);
   res.send(result);
 });
 
@@ -35,20 +41,26 @@ ProductRouter.get("/products/category", async (req, res) => {
     res.send(result);
   });
 
-  ProductRouter.get("/products/brands", async (req, res) => {
-    console.log("Brands avah huselt orj irlee");
-    const { query } = req;
-    const result = await getBrands();
-    res.send(result);
-    console.log(result);
-  });
+ProductRouter.get("/products/brands", async (req, res) => {
+  console.log("Brands avah huselt orj irlee");
+  const { query } = req;
+  const result = await getBrands();
+  res.send(result);
+  console.log(result);
+});
 
-  ProductRouter.get("/products/brand", async (req, res) => {
-    console.log("Brand avah huselt orj irlee");
-    const { query } = req;
-    console.log("Param: ", query.param);
-    const result = await byBrand(query.param);
-    res.send(result);
-  });
+ProductRouter.get("/products/brand", async (req, res) => {
+  console.log("Brand avah huselt orj irlee");
+  const { query } = req;
+  console.log("Param: ", query.param);
+  const result = await byBrand(query.param);
+  res.send(result);
+});
+
+ProductRouter.delete("/products", async (req, res) => {
+  console.log("Product ustgah huselt orj irlee");
+  const { query } = req;
+  await delProduct(query.id);
+});
 
 export default ProductRouter;

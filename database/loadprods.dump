@@ -1,0 +1,173 @@
+INSERT INTO `product` (
+    name,
+    price,
+    image_url,
+    category,
+    brand,
+    stock,
+    sale
+) VALUES 
+  (
+    'Sony Alpha III',
+    1999,
+    'https://m.media-amazon.com/images/I/91rQ3XfEYzL._SL1500_.jpg',
+    1001,
+    2012,
+    2,
+    15
+  ),
+  (
+    'Samsung Galaxy S21 Ultra',
+    1199,
+    'https://images.samsung.com/is/image/samsung/p6pim/pk/galaxy-s21/gallery/pk-galaxy-s21-ultra-5g-g988-sm-g998bzkgmea-thumb-368317419?imwidth=480',
+    1002,
+    2001,
+    94,
+    15
+  ),
+  (
+    'Dell XPS 13 Laptop',
+    1099,
+    'https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-13-9315/media-gallery/notebook-xps-9315-nt-blue-gallery-3.psd?fmt=png-alpha&pscan=auto&scl=1&wid=4108&hei=2874&qlt=100,1&resMode=sharp2&size=4108,2874&chrss=full&imwidth=5000',
+    1003,
+    2002,
+    28,
+    0
+  ),
+  (
+    'Sony WH-1000XM4 Wireless Headphones',
+    349,
+    'https://m.media-amazon.com/images/I/51SKmu2G9FL._AC_SL1500_.jpg',
+    1004,
+    2012,
+    17,
+    10
+  ),
+  (
+    'Apple MacBook Air',
+    999,
+    'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/mbp-spacegray-select-202011_GEO_US?wid=1808&hei=1686&fmt=jpeg&qlt=80&.v=1613676421000',
+    1003,
+    2003,
+    50,
+    15
+  ),
+  (
+    'Google Pixel 6 Pro',
+    1099,
+    'https://m.media-amazon.com/images/I/716n8eAia+L._AC_SL1500_.jpg',
+    1002,
+    2004,
+    20,
+    0
+  ),
+  (
+    'Sony WH-1000XM4 Wireless Headphones',
+    349,
+    'https://m.media-amazon.com/images/I/51mb1s9WcXL._AC_SL1200_.jpg',
+    1004,
+    2012,
+    80,
+    0
+  ),
+  (
+    'KitchenAid Artisan Stand Mixer',
+    379,
+    'https://m.media-amazon.com/images/I/71DAYttsoPL._AC_SL1500_.jpg',
+    1005,
+    2005,
+    10,
+    0
+  ),
+  (
+    'iRobot Roomba 981 Robot Vacuum',
+    599,
+    'https://m.media-amazon.com/images/I/51c6piKhqCL._AC_SL1280_.jpg',
+    1005,
+    2006,
+    16,
+    5
+  ),
+  (
+    'Bose QuietComfort 35 II Wireless Headphones',
+    299,
+    'https://images-na.ssl-images-amazon.com/images/I/81%2BjNVOUsJL._AC_SL1500_.jpg',
+    1004,
+    2007,
+    40,
+    0
+  ),
+  (
+    'Ninja Professional Blender',
+    89,
+    'https://m.media-amazon.com/images/I/61QL5R7NwRL._AC_SL1500_.jpg',
+    1005,
+    2008,
+    20,
+    0
+  ),
+  (
+    'Instant Pot Duo Nova 7-in-1 Electric Pressure Cooker',
+    99,
+    'https://m.media-amazon.com/images/I/71HY+O5xSjL._AC_SL1500_.jpg',
+    1005,
+    2009,
+    30,
+    0
+  ),
+  (
+    'Ninja Foodi Smart XL Grill',
+    349,
+    'https://m.media-amazon.com/images/I/81qUHmm7I4L._AC_SL1500_.jpg',
+    1005,
+    2008,
+    20,
+    10
+  ),
+  (
+    'Instant Pot Duo Nova',
+    99,
+    'https://m.media-amazon.com/images/I/71xBKH4owuL._AC_SL1500_.jpg',
+    1005,
+    2009,
+    35,
+    5
+  ),
+  (
+    'Breville Barista Pro Espresso Machine',
+    799,
+    'https://m.media-amazon.com/images/I/71orFaFS0pL._AC_SL1500_.jpg',
+    1005,
+    2010,
+    12,
+    0
+  ),
+  (
+    'HP Probook 430',
+    350,
+    'https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c06927801.png',
+    1003,
+    2011,
+    2,
+    10
+  ),
+  (
+    'Sony WH-1000XM4 Wireless Noise-Cancelling Headphones',
+    348,
+    'https://m.media-amazon.com/images/I/71P36mwxA4L._AC_SL1500_.jpg',
+    1004,
+    2012,
+    12,
+    10
+  ),
+  (
+    'WH-1000Shin Wireless Headphones',
+    50,
+    'https://formhouse.in/wp-content/uploads/2022/06/index.png',
+    1000,
+    2000,
+    120,
+    25
+  )
+
+

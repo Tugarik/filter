@@ -1,14 +1,19 @@
 import {pool} from "../config/mysql-config.js";
 
-export async function getProducts(isDesc) {
-    const [rows] = await pool.query(`SELECT * FROM product order by price ${isDesc? 'desc' : 'asc'}`);
-    console.log(`SELECT * FROM product order by price ${isDesc==true? 'desc' : 'asc'}`);
+export async function getProducts() {
+    const [rows] = await pool.query(`SELECT * FROM product`);
+    console.log(`SELECT * FROM product`);
+    return rows;
+  }
+
+export async function getSort(isDesc) {
+    const [rows] = await pool.query(`SELECT * FROM product order by price ${isDesc=='true'? 'desc' : 'asc'}`);
     return rows;
   }
 
   export async function getMore(limit, portion, isDesc) {
     const [rows] = await pool.query(
-      `SELECT * FROM product order by price ${isDesc==true? 'desc' : 'asc'} limit ${portion*limit-limit}, ${limit}`
+      `SELECT * FROM product order by price ${isDesc=='true'? 'desc' : 'asc'} limit ${portion*limit-limit}, ${limit}`
     );
     return rows;
   }

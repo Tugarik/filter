@@ -1,13 +1,17 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDataContext } from "../context/DataContext";
 
 
 export default function ByBrand() {
     const { param } = useParams();
     const {data, setData, isDesc, setIsDesc} = useDataContext();
+    const [brands, setBrands] = useState();
+    const [toggle, setToggle] = useState(true);
+    const navigate = useNavigate();
+
     const sortPrice = () => {
         console.log("sort");
         setIsDesc(!isDesc);
@@ -16,7 +20,19 @@ export default function ByBrand() {
     
       const handleDelete = (id) => {
         console.log("delete: ", id);
+        setToggle(!toggle);
+          try {
+            axios
+              .delete(
+                `http://localhost:5000/products?id=${id}`
+              )
+              .then((res) => setData(res.data));
+          } catch (error) {
+            console.log(error.message);
+          }
+        
       };
+      
     useEffect(() => {
         try {
           axios
@@ -27,16 +43,35 @@ export default function ByBrand() {
         } catch (error) {
           console.log(error.message);
         }
-      }, [setData, param]);
+      }, [setData, param, isDesc, toggle]);
+
+      
+      useEffect(() => {
+          try {
+            axios
+              .get(
+                `http://localhost:5000/products/brands`
+              )
+              .then((res) => setBrands(res.data));
+          } catch (error) {
+            console.log(error.message);
+          }
+        }, [setBrands]);
+
     return (
         <>
-            
+            <hr/>
+            <div>{brands && brands.map((brand, index)=>{
+                return(<span key={index} className="subMenu" onClick={(e)=>{e.preventDefault(); navigate(`/brand/${brand.brandName}`);}}> {brand.brandName} |</span>)
+            })}
+            </div>
+            <hr/>
             <h3 className="my-3">Category table: {param}</h3>
             <Table striped bordered hover>
                 <thead>
                     <tr>
                     <th>
-                        <div className="tableHead">URL</div>
+                        <div className="tableHead">Image</div>
                     </th>
                     <th>
                         <div className="tableHead">Name</div>
@@ -44,8 +79,8 @@ export default function ByBrand() {
                     <th>
                         Price
                         <button className="sortBtn" onClick={sortPrice} type="text">
-                        <i className="bi bi-sort-down-alt"></i>
-                        <i className="bi bi-sort-down"></i>
+                          {isDesc?<i className="bi bi-sort-down-alt"></i>
+                          :<i className="bi bi-sort-down"></i>}
                         </button>
                     </th>
                     <th>

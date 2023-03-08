@@ -1,15 +1,14 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-// import TableArea from "./components/TableArea";
 import DataContext from "./context/DataContext";
 import Home from "./pages/Home";
 import AllProducts from "./components/AllProducts";
 import LoadMore from "./components/LoadMore";
 import Categories from "./components/Categories";
-import Brands from "./components/Brands";
-import AddProduct from "./components/AddProduct";
 import ByCategory from "./components/ByCategory";
+import Brands from "./components/Brands";
 import ByBrand from "./components/ByBrand";
+import AddProduct from "./components/AddProduct";
 
 function App() {
   return (

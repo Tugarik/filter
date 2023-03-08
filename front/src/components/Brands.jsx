@@ -19,7 +19,7 @@ export default function Brands() {
         }
       }, [setData]);
     return (
-        <>
+        
             <div className="cardBox d-flex flex-wrap">
                 {data && data.map((data, index)=>{
                     return (
@@ -38,6 +38,6 @@ export default function Brands() {
                 })}
                 
             </div>
-        </>
+        
     );
 }

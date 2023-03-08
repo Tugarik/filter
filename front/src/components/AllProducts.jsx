@@ -1,39 +1,61 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import { useDataContext } from "../context/DataContext";
 
 export default function AllProducts() {
   const { data, setData, isDesc, setIsDesc } =
     useDataContext();
-
+  const [toggle, setToggle] = useState(true);
   const sortPrice = () => {
     console.log("sort");
     setIsDesc(!isDesc);
     console.log(isDesc);
-  };
-
-  const handleDelete = (id) => {
-    console.log("delete: ", id);
-  };
-  useEffect(() => {
     try {
       axios
         .get(
-          `http://localhost:5000/products?isDesc=${isDesc}`
+          `http://localhost:5000/products/sort?isDesc=${isDesc}`
         )
         .then((res) => setData(res.data));
     } catch (error) {
       console.log(error.message);
     }
-  }, [isDesc, setData]);
+  
+  };
+
+  const handleDelete = (id) => {
+    console.log("delete: ", id);
+    setToggle(!toggle);
+      try {
+        axios
+          .delete(
+            `http://localhost:5000/products?id=${id}`
+          )
+          .then((res) => setData(res.data));
+      } catch (error) {
+        console.log(error.message);
+      }
+    
+  };
+
+  useEffect(() => {
+    try {
+      axios
+        .get(
+          `http://localhost:5000/products`
+        )
+        .then((res) => setData(res.data));
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, [setData, toggle]);
 
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
           <th>
-            <div className="tableHead">URL</div>
+            <div className="tableHead">Image</div>
           </th>
           <th>
             <div className="tableHead">Name</div>
@@ -41,8 +63,8 @@ export default function AllProducts() {
           <th>
             Price
             <button className="sortBtn" onClick={sortPrice} type="text">
-              <i className="bi bi-sort-down-alt"></i>
-              <i className="bi bi-sort-down"></i>
+              {isDesc?<i className="bi bi-sort-down-alt"></i>
+              :<i className="bi bi-sort-down"></i>}
             </button>
           </th>
           <th>

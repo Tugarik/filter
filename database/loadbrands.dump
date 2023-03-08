@@ -1,0 +1,14 @@
+INSERT INTO `brand` (brandName, brandImage) VALUES 
+('Other', 'https://formhouse.in/wp-content/uploads/2022/06/index.png'),
+('Samsung', 'https://1000logos.net/wp-content/uploads/2017/06/Samsung-Logo-2.png'),
+('Dell', 'https://1000logos.net/wp-content/uploads/2017/07/Dell-Logo.png'),
+('Apple', 'https://1000logos.net/wp-content/uploads/2016/10/Apple-Logo.png'),
+('Google', 'https://1000logos.net/wp-content/uploads/2021/05/Google-logo.png'),
+('KitchenAid', 'https://1000logos.net/wp-content/uploads/2017/12/KitchenAid-Logo.png'),
+('iRobot', 'https://media.irobot.com/image/iRobot+Logo+Print+%28002%29+400px.jpg'),
+('Bose', 'https://1000logos.net/wp-content/uploads/2021/05/Bose-logo.png'),
+('Ninja', 'https://ninjakitchen.co.uk/INTERSHOP/static/WFS/SharkNinja-GB-Site/ninja-responsive/SharkNinja-GB-ninja-responsive/en_GB/Ninja-logo.svg'),
+('Instant Pot', 'https://logovectordl.com/wp-content/uploads/2021/03/instant-pot-logo-vector.png'),
+('Breville', 'https://d33wubrfki0l68.cloudfront.net/b4479a6d841f4e4e28d809e4821572a6c0056f9f/a708f/img/breville-logo_3d.png'),
+('HP', 'https://1000logos.net/wp-content/uploads/2021/04/HP-logo.png'),
+('Sony', 'https://1000logos.net/wp-content/uploads/2021/05/Sony-logo.png');
