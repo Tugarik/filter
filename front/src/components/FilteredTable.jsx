@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Table from "react-bootstrap/Table";
+import { Table } from "react-bootstrap";
 import { useDataContext } from "../context/DataContext";
 
-export default function AllProducts() {
+export default function FilteredTable() {
   const { data, setData, isDesc, setIsDesc } = useDataContext();
   const [toggle, setToggle] = useState(true);
 
@@ -39,7 +39,6 @@ export default function AllProducts() {
       console.log(error.message);
     }
   }, [setData, toggle, setToggle]);
-
   return (
     <Table striped bordered hover>
       <thead>

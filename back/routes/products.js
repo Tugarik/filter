@@ -1,9 +1,18 @@
 import express from "express";
-import { byBrand, byCategory, delProduct, getBrands, getCategories, getMore, getProducts, getSort } from "../services/product-service.js";
+import {
+  addBrand,
+  addCategory,
+  byBrand,
+  byCategory,
+  delProduct,
+  getBrands,
+  getCategories,
+  getMore,
+  getProducts,
+  getSort,
+} from "../services/product-service.js";
 
 const ProductRouter = express.Router();
-
-
 
 ProductRouter.get("/products", async (req, res) => {
   console.log("Product avah huselt orj irlee");
@@ -19,27 +28,31 @@ ProductRouter.get("/products/sort", async (req, res) => {
 });
 
 ProductRouter.get("/products/more", async (req, res) => {
-    console.log("More avah huselt orj irlee");
-    const { query } = req;
-    const result = await getMore(query.limit || 10, query.portion || 0, query.isDesc || 'asc');
-    res.send(result);
-  });
-  
+  console.log("More avah huselt orj irlee");
+  const { query } = req;
+  const result = await getMore(
+    query.limit || 10,
+    query.portion || 0,
+    query.isDesc || "asc"
+  );
+  res.send(result);
+});
+
 ProductRouter.get("/products/categories", async (req, res) => {
-    console.log("Categories avah huselt orj irlee");
-    const { query } = req;
-    const result = await getCategories();
-    res.send(result);
-    console.log(result);
-  });
+  console.log("Categories avah huselt orj irlee");
+  const { query } = req;
+  const result = await getCategories();
+  res.send(result);
+  console.log(result);
+});
 
 ProductRouter.get("/products/category", async (req, res) => {
-    console.log("Category avah huselt orj irlee");
-    const { query } = req;
-    console.log("Param: ", query.param);
-    const result = await byCategory(query.param);
-    res.send(result);
-  });
+  console.log("Category avah huselt orj irlee");
+  const { query } = req;
+  console.log("Param: ", query.param);
+  const result = await byCategory(query.param);
+  res.send(result);
+});
 
 ProductRouter.get("/products/brands", async (req, res) => {
   console.log("Brands avah huselt orj irlee");
@@ -55,6 +68,20 @@ ProductRouter.get("/products/brand", async (req, res) => {
   console.log("Param: ", query.param);
   const result = await byBrand(query.param);
   res.send(result);
+});
+
+ProductRouter.post("/products/category", async (req, res) => {
+  console.log("Category nemeh huselt orj irlee");
+  const { query } = req;
+  console.log("Param: ", query.param);
+  await addCategory(query.param);
+});
+
+ProductRouter.post("/products/brand", async (req, res) => {
+  console.log("Brand nemeh huselt orj irlee");
+  const { query } = req;
+  console.log("Param: ", query.param);
+  await addBrand(query.param);
 });
 
 ProductRouter.delete("/products", async (req, res) => {

@@ -5,6 +5,7 @@
 .buttonBox {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .sortBtn {
   width: fit-content;
@@ -21,7 +22,7 @@
 .menuBtn {
   margin: 15px 25px;
   padding: 10px 25px;
-  width: 250px;
+  width: 200px;
   border: 0;
   border-radius: 15px;
   background-color: #6c757d;
