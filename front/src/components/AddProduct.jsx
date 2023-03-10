@@ -11,26 +11,36 @@ export default function AddProduct() {
   const [toggle, setToggle] = useState(true);
 
   const sendNewCategory = (newCategory) => {
-    console.log(newCategory);
-    setToggle(!toggle);
-    try {
-      axios
-        .post(`http://localhost:5000/products/category?param=${newCategory}`)
-        .then((res) => setCategories(res.data));
-    } catch (error) {
-      console.log(error.message);
+    if (!newCategory || newCategory.trim() === "") {
+      console.log("need more info");
+    } else {
+      console.log(newCategory);
+      setToggle(!toggle);
+      try {
+        axios
+          .post(
+            `http://localhost:5000/products/category?param=${newCategory.trim()}`
+          )
+          .then((res) => setCategories(res.data));
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   };
 
   const sendNewBrand = (newBrand) => {
-    console.log(newBrand);
+    if (!newBrand || newBrand.trim() === "") {
+      console.log("need more info");
+    } else {
+      console.log(newBrand);
 
-    try {
-      axios
-        .post(`http://localhost:5000/products/brand?param=${newBrand}`)
-        .then((res) => setToggle(!toggle));
-    } catch (error) {
-      console.log(error.message);
+      try {
+        axios
+          .post(`http://localhost:5000/products/brand?param=${newBrand.trim()}`)
+          .then((res) => setToggle(!toggle));
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   };
 
@@ -42,7 +52,7 @@ export default function AddProduct() {
     } catch (error) {
       console.log(error.message);
     }
-  }, [setCategories, setToggle]);
+  }, [setCategories, toggle]);
 
   useEffect(() => {
     try {
@@ -54,14 +64,19 @@ export default function AddProduct() {
     }
   }, [setBrands, toggle]);
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const form = e.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
       console.log("need more info");
     } else {
-      console.log("submited");
+      console.log("name: ", form.productName.value);
+      console.log("price: ", form.productPrice.value);
+      console.log("url: ", form.productUrl.value);
+      console.log("category: ", form.selectedCategory.value);
+      console.log("brand: ", form.selectedBrand.value);
+      alert("Product created");
     }
     setValidated(true);
   };
@@ -76,8 +91,16 @@ export default function AddProduct() {
             controlId="validationCustom01"
             className="mt-5"
           >
-            <Form.Control required type="text" placeholder="Product name" />
+            <Form.Control
+              required
+              type="text"
+              placeholder="Product name"
+              name="productName"
+            />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">
+              Field is empty!
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group
             as={Col}
@@ -85,13 +108,26 @@ export default function AddProduct() {
             controlId="validationCustom02"
             className="mt-5"
           >
-            <Form.Control required type="text" placeholder="Price" />
+            <Form.Control
+              required
+              type="text"
+              placeholder="Price"
+              name="productPrice"
+            />
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">
+              Field is empty!
+            </Form.Control.Feedback>
           </Form.Group>
         </Row>
         <Row className="m-5">
           <Form.Group as={Col} md="12" controlId="validationCustom03">
-            <Form.Control type="text" placeholder="Image url" required />
+            <Form.Control
+              type="text"
+              placeholder="Image url"
+              required
+              name="productUrl"
+            />
             <Form.Control.Feedback type="invalid">
               Please provide a valid url.
             </Form.Control.Feedback>
@@ -105,7 +141,12 @@ export default function AddProduct() {
             controlId="validationCustom04"
             className="mt-5"
           >
-            <Form.Select aria-label="Select category">
+            <Form.Select
+              required
+              type="select"
+              aria-label="Select category"
+              name="selectedCategory"
+            >
               <option value="">Category select</option>
               {categories &&
                 categories.map((category, index) => (
@@ -117,6 +158,7 @@ export default function AddProduct() {
             <Form.Control.Feedback type="invalid">
               Please choose a category.
             </Form.Control.Feedback>
+            <Form.Control.Feedback>Look good!</Form.Control.Feedback>
           </Form.Group>
           <Form.Group
             as={Col}
@@ -124,8 +166,12 @@ export default function AddProduct() {
             controlId="validationCustom05"
             className="mt-5"
           >
-            <Form.Select aria-label="Default select example">
-              <option>Brand select</option>
+            <Form.Select
+              required
+              aria-label="Select brand"
+              name="selectedBrand"
+            >
+              <option value="">Brand select</option>
               {brands &&
                 brands.map((brand, index) => (
                   <option value={brand.brandName} key={index}>
@@ -134,52 +180,62 @@ export default function AddProduct() {
                 ))}
             </Form.Select>
             <Form.Control.Feedback type="invalid">
-              Please choose a brand.
+              Please choose a category.
             </Form.Control.Feedback>
+            <Form.Control.Feedback>Look good!</Form.Control.Feedback>
           </Form.Group>
         </Row>
 
         <Button type="submit">+ Add product</Button>
       </Form>
       <hr />
-
       <Row className="m-5">
-        <Form.Group as={Col} md="6">
+        <Form.Group as={Col} md="6" controlId="validationCustom06">
           <Form.Control
+            required
             type="text"
             placeholder="Add Category Name"
             className="mt-5"
             name="addCategory"
             onChange={(e) => setNewCategory(e.target.value)}
           />
-
+          <Form.Control.Feedback>Look good!</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">
+            Field is empty!
+          </Form.Control.Feedback>
           <Button
             type="button"
             className="mt-3"
             onClick={(e) => {
               e.preventDefault();
               sendNewCategory(newCategory);
+              setToggle(!toggle);
             }}
           >
             + Add category
           </Button>
         </Form.Group>
 
-        <Form.Group as={Col} md="6">
+        <Form.Group as={Col} md="6" controlId="validationCustom07">
           <Form.Control
+            required
             type="text"
             placeholder="Add Brand Name"
             className="mt-5"
             name="addBrand"
             onChange={(e) => setNewBrand(e.target.value)}
           />
-
+          <Form.Control.Feedback>Look good!</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">
+            Field is empty!
+          </Form.Control.Feedback>
           <Button
             type="button"
             className="mt-3"
             onClick={(e) => {
               e.preventDefault();
               sendNewBrand(newBrand);
+              setToggle(!toggle);
             }}
           >
             + Add Brand
