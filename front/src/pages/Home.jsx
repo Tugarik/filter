@@ -3,22 +3,20 @@ import AllProducts from "../components/AllProducts";
 import Brands from "../components/Brands";
 import Categories from "../components/Categories";
 import LoadMore from "../components/LoadMore";
+import Pagination from "../components/Pagination";
 import { useDataContext } from "../context/DataContext";
 
 const menus = [
-  { name: "All products", filter: "", nav: "/", component: <AllProducts /> },
-  { name: "Load More", filter: "5", nav: "/more", component: <LoadMore /> },
+  { name: "All products", component: <AllProducts /> },
+  { name: "Pagination", component: <Pagination /> },
+  { name: "Load More", component: <LoadMore /> },
   {
     name: "Categories",
-    filter: "",
-    nav: "/categories",
     component: <Categories />,
   },
-  { name: "Brands", filter: "", nav: "/brands", component: <Brands /> },
+  { name: "Brands", component: <Brands /> },
   {
     name: "Add Product",
-    filter: "",
-    nav: "/addProduct",
     component: <AddProduct />,
   },
 ];

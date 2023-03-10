@@ -8,6 +8,7 @@ import {
   getBrands,
   getCategories,
   getMore,
+  getPagination,
   getProducts,
   getSort,
 } from "../services/product-service.js";
@@ -30,7 +31,14 @@ ProductRouter.get("/products/sort", async (req, res) => {
 ProductRouter.get("/products/more", async (req, res) => {
   console.log("More avah huselt orj irlee");
   const { query } = req;
-  const result = await getMore(
+  const result = await getMore(query.limit || 10, query.isDesc || "asc");
+  res.send(result);
+});
+
+ProductRouter.get("/products/pagination", async (req, res) => {
+  console.log("Pagination avah huselt orj irlee");
+  const { query } = req;
+  const result = await getPagination(
     query.limit || 10,
     query.portion || 0,
     query.isDesc || "asc"

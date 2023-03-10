@@ -7,7 +7,9 @@ export function useDataContext() {
 }
 
 export default function DataContext({ children }) {
-  const [current, setCurrent] = useState(JSON.parse(localStorage.getItem("menu")) || 0);
+  const [current, setCurrent] = useState(
+    JSON.parse(localStorage.getItem("menu")) || 0
+  );
   const [filter, setFilter] = useState("5");
   const [data, setData] = useState();
   const [isDesc, setIsDesc] = useState();
@@ -25,7 +27,7 @@ export default function DataContext({ children }) {
         isDesc,
         setIsDesc,
         portion,
-        setPortion
+        setPortion,
       }}
     >
       {children}

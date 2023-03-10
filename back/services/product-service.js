@@ -13,11 +13,25 @@ export async function getSort(isDesc) {
   return rows;
 }
 
-export async function getMore(limit, portion, isDesc) {
+export async function getPagination(limit, portion, isDesc) {
   const [rows] = await pool.query(
     `SELECT * FROM product order by price ${
       isDesc == "true" ? "desc" : "asc"
     } limit ${portion * limit - limit}, ${limit}`
+  );
+  return rows;
+}
+
+export async function getMore(limit, isDesc) {
+  const [rows] = await pool.query(
+    `SELECT * FROM product order by price ${
+      isDesc == "true" ? "desc" : "asc"
+    } limit ${limit}`
+  );
+  console.log(
+    `SELECT * FROM product order by price ${
+      isDesc == "true" ? "desc" : "asc"
+    } limit ${limit}`
   );
   return rows;
 }

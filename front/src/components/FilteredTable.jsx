@@ -39,6 +39,7 @@ export default function FilteredTable() {
       console.log(error.message);
     }
   }, [setData, toggle, setToggle]);
+
   return (
     <Table striped bordered hover>
       <thead>

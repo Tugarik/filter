@@ -1,14 +1,20 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Table } from "react-bootstrap";
+import Table from "react-bootstrap/Table";
 import { useDataContext } from "../context/DataContext";
 
-export default function ByBrand(param) {
-  const { data, setData, isDesc, setIsDesc } = useDataContext();
-  const [brands, setBrands] = useState();
+export default function Pagination() {
+  const {
+    data,
+    setData,
+    filter,
+    setFilter,
+    isDesc,
+    setIsDesc,
+    portion,
+    setPortion,
+  } = useDataContext();
   const [toggle, setToggle] = useState(true);
-
-  const [brandName, setBrandName] = useState(param.param);
 
   const sortPrice = () => {
     console.log("sort");
@@ -20,57 +26,27 @@ export default function ByBrand(param) {
     console.log("delete: ", id);
     setToggle(!toggle);
     try {
-      axios
-        .delete(`http://localhost:5000/products?id=${id}`)
-        .then((res) => setData(res.data));
+      axios.delete(`http://localhost:5000/products?id=${id}`);
     } catch (error) {
       console.log(error.message);
     }
   };
 
   useEffect(() => {
+    setFilter(5);
     try {
       axios
-        .get(`http://localhost:5000/products/brand?param=${brandName}`)
+        .get(
+          `http://localhost:5000/products/pagination?limit=${filter}&isDesc=${isDesc}&portion=${portion}`
+        )
         .then((res) => setData(res.data));
     } catch (error) {
       console.log(error.message);
     }
-  }, [setData, brandName, isDesc, toggle]);
-
-  useEffect(() => {
-    try {
-      axios
-        .get(`http://localhost:5000/products/brands`)
-        .then((res) => setBrands(res.data));
-    } catch (error) {
-      console.log(error.message);
-    }
-  }, [setBrands]);
+  }, [filter, isDesc, setData, portion, setPortion, toggle, setFilter]);
 
   return (
     <>
-      <hr />
-      <div>
-        {brands &&
-          brands.map((brand, index) => {
-            return (
-              <span
-                key={index}
-                className="subMenu"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setBrandName(brand.brandName);
-                }}
-              >
-                {" "}
-                {brand.brandName} |
-              </span>
-            );
-          })}
-      </div>
-      <hr />
-      <h3 className="my-3">Category table: {brandName}</h3>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -133,6 +109,28 @@ export default function ByBrand(param) {
             ))}
         </tbody>
       </Table>
+      {portion * filter - filter > 0 && (
+        <button
+          className="menuBtn menuBtn-active"
+          onClick={(e) => {
+            e.preventDefault();
+            setPortion((prev) => prev - 1);
+          }}
+        >
+          Previous
+        </button>
+      )}
+      {data && data.length >= 5 && (
+        <button
+          className="menuBtn menuBtn-active"
+          onClick={(e) => {
+            e.preventDefault();
+            setPortion((prev) => prev + 1);
+          }}
+        >
+          Next
+        </button>
+      )}
     </>
   );
 }

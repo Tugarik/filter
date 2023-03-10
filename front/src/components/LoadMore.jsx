@@ -4,7 +4,7 @@ import Table from "react-bootstrap/Table";
 import { useDataContext } from "../context/DataContext";
 
 export default function LoadMore() {
-  const { data, setData, filter, isDesc, setIsDesc, portion, setPortion } =
+  const { data, setData, filter, setFilter, isDesc, setIsDesc } =
     useDataContext();
   const [toggle, setToggle] = useState(true);
 
@@ -28,13 +28,13 @@ export default function LoadMore() {
     try {
       axios
         .get(
-          `http://localhost:5000/products/more?limit=${filter}&isDesc=${isDesc}&portion=${portion}`
+          `http://localhost:5000/products/more?limit=${filter}&isDesc=${isDesc}`
         )
         .then((res) => setData(res.data));
     } catch (error) {
       console.log(error.message);
     }
-  }, [filter, isDesc, setData, portion, setPortion, toggle]);
+  }, [filter, isDesc, setData, toggle]);
 
   return (
     <>
@@ -100,26 +100,15 @@ export default function LoadMore() {
             ))}
         </tbody>
       </Table>
-      {portion * filter - filter > 0 && (
+      {data && data.length >= filter && (
         <button
           className="menuBtn menuBtn-active"
           onClick={(e) => {
             e.preventDefault();
-            setPortion((prev) => prev - 1);
+            setFilter((prev) => Number(prev) + 5);
           }}
         >
-          Previous
-        </button>
-      )}
-      {filter >= 5 && (
-        <button
-          className="menuBtn menuBtn-active"
-          onClick={(e) => {
-            e.preventDefault();
-            setPortion((prev) => prev + 1);
-          }}
-        >
-          Next
+          View More
         </button>
       )}
     </>
