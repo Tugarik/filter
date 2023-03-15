@@ -71,6 +71,21 @@ export default function AddProduct() {
     if (form.checkValidity() === false) {
       console.log("need more info");
     } else {
+      try {
+        axios
+          .post(
+            `http://localhost:5000/product?
+          name=${form.productName.value.trim()}&
+          price=${form.productPrice.value}&
+          image_url=${form.productUrl.value}&
+          category=${form.selectedCategory.value}&
+          brand=${form.selectedBrand.value}
+          `
+          )
+          .then((res) => setToggle(!toggle));
+      } catch (error) {
+        console.log(error.message);
+      }
       console.log("name: ", form.productName.value);
       console.log("price: ", form.productPrice.value);
       console.log("url: ", form.productUrl.value);

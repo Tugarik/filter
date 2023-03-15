@@ -6,6 +6,30 @@ export async function getProducts() {
   return rows;
 }
 
+export async function addProduct(name, price, image_url, category, brand) {
+  const [rows] = await pool.query(
+    `INSERT INTO product (
+      name,
+      price,
+      image_url,
+      category,
+      brand,
+      stock,
+      sale
+  ) VALUES ('${name}','${price}','${image_url}','${category}','${brand}', '1','0')`
+  );
+  console.log(`INSERT INTO product (
+    name,
+    price,
+    image_url,
+    category,
+    brand,
+    stock,
+    sale
+) VALUES ('${name}','${price}','${image_url}','${categoryName}','${brandName}', '1','0')`);
+  return rows;
+}
+
 export async function getSort(isDesc) {
   const [rows] = await pool.query(
     `SELECT * FROM product order by price ${isDesc == "true" ? "desc" : "asc"}`

@@ -2,6 +2,7 @@ import express from "express";
 import {
   addBrand,
   addCategory,
+  addProduct,
   byBrand,
   byCategory,
   delProduct,
@@ -32,6 +33,20 @@ ProductRouter.get("/products/more", async (req, res) => {
   console.log("More avah huselt orj irlee");
   const { query } = req;
   const result = await getMore(query.limit || 10, query.isDesc || "asc");
+  res.send(result);
+});
+
+ProductRouter.post("/product", async (req, res) => {
+  console.log("Product nemeh huselt orj irlee");
+  const { query } = req;
+  console.log(query);
+  const result = await addProduct(
+    query.name,
+    query.price,
+    query.image_url,
+    query.category,
+    query.brand
+  );
   res.send(result);
 });
 

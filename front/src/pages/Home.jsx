@@ -54,7 +54,5 @@ export default function Home() {
         </>
       }
     </div>
-    // <Navigation/>
-    // <Outlet/>
   );
 }
