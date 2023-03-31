@@ -23,7 +23,6 @@ const menus = [
 
 export default function Home() {
   function menuClickHandler(inp) {
-    console.log(inp);
     setCurrent(inp);
     localStorage.setItem("menu", JSON.stringify(inp));
   }

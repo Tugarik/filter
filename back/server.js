@@ -3,7 +3,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import ProductRouter from "./routes/products.js";
 
-const PORT = 5000;
+const PORT = 5001;
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
